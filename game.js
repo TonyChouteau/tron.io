@@ -24,7 +24,9 @@ function setup() {
 function start(){
     console.log("x");
     let name = document.getElementById("name").value;
-    socket.emit('new player', width, height, name);
+    if (name != ""){
+        socket.emit('new player', width, height, name);
+    }
 }
 
 
