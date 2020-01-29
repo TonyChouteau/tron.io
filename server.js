@@ -32,7 +32,7 @@ server.listen(5000, function () {
 
 let players = {};
 let speed = 6;
-let rotationSpeed = Math.PI / 10;
+let rotationSpeed = Math.PI / 20;
 let width = 900;
 let height = 900;
 
