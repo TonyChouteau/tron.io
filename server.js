@@ -119,7 +119,7 @@ setInterval(function () {
             players[id].x >= width || 
             players[id].x <= 0 || 
             players[id].y <= 0 ||
-            players[id].time >= 150 ||
+            players[id].time >= 60 ||
             mustBeDestroyed) {
                 
             io.sockets.emit('explosion', players[id]);
