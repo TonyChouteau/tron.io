@@ -38,7 +38,7 @@ let height = 900;
 
 // Add the WebSocket handlers
 io.on('connection', function (socket) {
-    socket.on('new player', function (w, h) {
+    socket.on('new player', function (w, h, name) {
         //console.log(w,h, Math.random(0,w), Math.random(0,h));
         players[socket.id] = {
             x: Math.random() * w,
@@ -48,6 +48,7 @@ io.on('connection', function (socket) {
             movement: {},
             line: [],
             time: 0,
+            name: name
         }
         players[socket.id].angle = Math.atan2(players[socket.id].x - w / 2, players[socket.id].y - h / 2) + Math.PI;
         players[socket.id].line.push({

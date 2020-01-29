@@ -13,15 +13,20 @@ setInterval(function () {
     socket.emit('movement', movement);
 }, 1000 / 30);
 
+
 function setup() {
     createCanvas(900, 900);
-
-    //console.log(width,height);
-    socket.emit('new player', width, height);
 
     background(50);
     ellipseMode(CENTER);
 }
+
+function start(){
+    console.log("x");
+    let name = document.getElementById("name").value;
+    socket.emit('new player', width, height, name);
+}
+
 
 function keyPressed(event) {
     //console.log(event.keyCode);
@@ -69,9 +74,15 @@ socket.on('state', function (players) {
         }
         //console.log(players[id].line)
         line(players[id].line[players[id].line.length-1].x,players[id].line[players[id].line.length-1].y, players[id].x,players[id].y);
+        
+        fill(255);
+        noStroke();
+        push();
+        translate(players[id].x, players[id].y);
+        text(players[id].name,10,10);
+        pop();
 
         fill(players[id].color);
-        noStroke();
         if (id === socket.id){
             strokeWeight(3);
             stroke("#FF0000");
