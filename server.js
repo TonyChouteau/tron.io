@@ -43,6 +43,7 @@ io.on('connection', function (socket) {
         players[socket.id] = {
             x: Math.random() * w,
             y: Math.random() * h,
+            i:0,
             angle: 0.0,
             color: '#' + Math.floor(Math.random() * (16777215 - 8388607) + 8388608).toString(16),
             movement: {},
@@ -68,12 +69,18 @@ io.on('connection', function (socket) {
 setInterval(function () {
     for (let id in players) {
 
-        if (players[id].movement.left || players[id].movement.right) {
-            players[id].line.push({
-                x: players[id].x,
-                y: players[id].y
-            });
-        }
+        //if (players[id].movement.left || players[id].movement.right) {
+            if (players[id].line.length > 50) {
+                players[id].line.shift();
+            }
+            if (players[id].i == 0 || (players[id].movement.left || players[id].movement.right) && players[id].i%2 == 0){
+                players[id].line.push({
+                    x: players[id].x,
+                    y: players[id].y
+                });
+            }
+            players[id].i = (players[id].i+1)%4;
+        //}
         
         players[id].y += speed * Math.cos(players[id].angle);
         players[id].x += speed * Math.sin(players[id].angle);
