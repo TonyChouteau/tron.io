@@ -14,21 +14,12 @@ setInterval(function () {
 }, 1000 / 30);
 
 
-function setup() {
-    createCanvas(900, 900);
-
-    background(50);
-    ellipseMode(CENTER);
+function start() {
+	let name = document.getElementById("name").value;
+	if (name != "") {
+		socket.emit("new player", width, height, name);
+	}
 }
-
-function start(){
-    console.log("x");
-    let name = document.getElementById("name").value;
-    if (name != ""){
-        socket.emit('new player', width, height, name);
-    }
-}
-
 
 function keyPressed(event) {
     //console.log(event.keyCode);
@@ -65,6 +56,12 @@ function keyReleased(event) {
             break;
     }
 }
+
+function setup() {
+    createCanvas(900, 900);
+
+    background(50);
+    ellipseMode(CENTER);
 
 socket.on('state', function (players) {
     background(50);
@@ -105,3 +102,4 @@ socket.on('explosion', function (player) {
 /*function draw(){
 
 }*/
+}

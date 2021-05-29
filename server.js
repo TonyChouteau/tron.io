@@ -8,7 +8,7 @@ var app = express();
 var server = http.Server(app);
 var io = socketIO(server);
 
-app.set('port', 5000);
+app.set('port', 8089);
 app.use('/static', express.static(__dirname + '/static'));
 
 // Routing
@@ -26,8 +26,8 @@ app.get('/explosion.js', function (request, response) {
 });
 
 // Starts the server.
-server.listen(5000, function () {
-    console.log('Starting server on port 5000');
+server.listen(8089, function () {
+    console.log('Starting server on port 8089');
 });
 
 let players = {};
