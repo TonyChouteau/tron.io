@@ -1,11 +1,17 @@
 // Dependencies
 var express = require('express');
-var http = require('http');
+var https = require('https');
 var path = require('path');
 var socketIO = require('socket.io');
+var fs = require("fs");
+
+var options = {
+        key : fs.readFileSync("/etc/letsencrypt/live/vps.tonychouteau.fr/privkey.pem"),
+        cert: fs.readFileSync("/etc/letsencrypt/live/vps.tonychouteau.fr/cert.pem"),
+}
 
 var app = express();
-var server = http.Server(app);
+var server = https.Server(options, app);
 var io = socketIO(server);
 
 app.set('port', 8089);
